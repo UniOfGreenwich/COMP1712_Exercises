@@ -195,7 +195,7 @@
 </code></pre>
 <details>
 <summary>Answer</summary>
-<pre><code class="language-sh">date +&quot;%Y%m%d&quot;
+<pre><code class="language-sh">date +"%Y%m%d"
 </code></pre>
 </details>
 </li>
@@ -205,7 +205,7 @@
 </code></pre>
 <details>
 <summary>Answer</summary>
-<pre><code class="language-sh">date +&quot;Year: %Y, Month: %m, Day: %d&quot;
+<pre><code class="language-sh">date +"Year: %Y, Month: %m, Day: %d"
 </code></pre>
 </details>
 </li>
@@ -229,12 +229,12 @@
 </ul>
 </li>
 <li>
-<p>Using the above information and what previous steps reproduce the ISO 8601 standard for datetime. </p>
+<p>Using the above information and what previous steps reproduce the ISO 8601 standard for datetime.</p>
 <pre><code class="language-sh">&gt; 2023-02-27T12:08:45Z
 </code></pre>
 <details>
 <summary>Answer</summary>
-<pre><code class="language-sh">$ date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot;
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ"
 </code></pre>
 <ul>
 <li><code>%Y</code> – Year (e.g., 2020)</li>
@@ -256,7 +256,7 @@
 </code></pre>
 <details>
 <summary>Answer</summary>
-<pre><code class="language-sh">$ date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot;
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ"
 </code></pre>
 <ul>
 <li><code>%Y</code> – Year (e.g., 2020)</li>
@@ -284,7 +284,7 @@
 <li>
 <p>Using <code>awk</code> we can manipulate the output by piping <code>|</code> the output of <code>date</code> into awk
 - first run this command</p>
-<pre><code class="language-sh">$ date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot; | awk &quot;{print $1}&quot; 
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk "{print $1}" 
 &gt; 2023-02-27T12:20:40:005619503Z   
 </code></pre>
 <ul>
@@ -293,7 +293,7 @@
 </li>
 <li>
 <p>Now lets remove the <code>T</code></p>
-<pre><code class="language-sh">$ date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot; | awk -F 'T' '{print $1}'
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F 'T' '{print $1}'
 &gt; 2023-02-27
 </code></pre>
 </li>
@@ -303,7 +303,7 @@
 <summary>Answer</summary>
 <pre><code class="language-sh">&gt; 12:50:48:341942600Z
 </code></pre>
-<p>This is because the input has been split and now </p>
+<p>This is because the input has been split and now</p>
 <ul>
 <li>$1 = 2023-02-27</li>
 <li>$2 = 12:20:40:005619503Z</li>
@@ -314,21 +314,21 @@
 <p>Change the delimeter <code>-F 'T'</code> to <code>-F ':'</code> and repeat both steps as before:</p>
 <details>
 <summary>Answer</details>
-<pre><code class="language-sh">$  date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot; | awk -F ':' '{print $1}'
+<pre><code class="language-sh">$  date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $1}'
 &gt;  2023-02-27T12
 </code></pre>
-<pre><code class="language-sh">$ date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot; | awk -F ':' '{print $2}'
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $2}'
   55
-$ date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot; | awk -F ':' '{print $3}'
+$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $3}'
   32
-$ date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot; | awk -F ':' '{print $4}'
+$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $4}'
   473072761Z
 </code></pre>
 </details>
 </li>
 <li>
 <p>You can put these together using the print {$2$3$4$}, try.
-<code>sh date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot; | awk -F ':' '{print $2$3$4}' 5719707652042Z </code></p>
+<code>sh      date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $2$3$4}'      5719707652042Z      </code></p>
 </li>
 <li>
 <p>Experiment with this and consider piping with awk to see if you can get:</p>
@@ -336,7 +336,7 @@ $ date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot; | awk -F ':' '{print $4}'
 </code></pre>
 <details>
 <summary>Answer</summary>
-<pre><code class="language-sh">$ date +&quot;%Y-%m-%dT%H:%M:%S:%NZ&quot; | awk -F '[-T:Z]' '{print $1$2$3$4$5$6$7$8$9}'
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F '[-T:Z]' '{print $1$2$3$4$5$6$7$8$9}'
 20230227130026355420256
 </code></pre>
 </details>

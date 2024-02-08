@@ -175,7 +175,7 @@
 <p>We will be doing this lab inconjuction with the C lecture. Key concepts will be explained and you will put into practice.</p>
 <p>So let's make our first program.</p>
 <p>To do this you will need to open up open a terminal on a Linux system.</p>
-<p>Create a new directory and call it <code>COMP1712/Learning_C</code> we can do this using the following commands in terminal. </p>
+<p>Create a new directory and call it <code>COMP1712/Learning_C</code> we can do this using the following commands in terminal.</p>
 <pre><code>$  mkdir -p COMP1712/Learning_C
 </code></pre>
 <blockquote>
@@ -183,7 +183,7 @@
 <blockquote>
 <ul>
 <li>the <code>$</code> symbol used in the above indicates that this is a command that should be entered into the terminal.</li>
-<li>these are shell commands written in <code>c</code>. </li>
+<li>these are shell commands written in <code>c</code>.</li>
 </ul>
 </blockquote>
 </blockquote>
@@ -195,7 +195,7 @@ $  touch helloworld.c
 <p><strong>Note:</strong></p>
 <blockquote>
 <ul>
-<li>each line should be entered in seperately </li>
+<li>each line should be entered in seperately</li>
 </ul>
 </blockquote>
 </blockquote>
@@ -205,40 +205,40 @@ $  touch helloworld.c
 <p><strong>Output:</strong></p>
 <pre><code>helloworld.c
 </code></pre>
-<p>Now we are going to open up and edit the content of the file and write it out: </p>
+<p>Now we are going to open up and edit the content of the file and write it out:</p>
 <pre><code>$ nano helloworld.c
 </code></pre>
-<p>Enter the following: </p>
+<p>Enter the following:</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt; // we need this library to get access to the input and out put methods for printing to terminal
 
 int main()
 {
-    printf(&quot;Hello World\n&quot;); // lets say hello, where it all began...
+    printf("Hello World\n"); // lets say hello, where it all began...
     
-    printf(&quot;Goodbye World\n&quot;); // this seems fitting as the program will close after this.
+    printf("Goodbye World\n"); // this seems fitting as the program will close after this.
     
     return 0; // returns 0 to the int of main() and terminate the program
 }
 </code></pre>
-<p>You will probably have noticed that at the bottom of the text editor there are a number of actions that can be completed. </p>
+<p>You will probably have noticed that at the bottom of the text editor there are a number of actions that can be completed.</p>
 <p>The <code>^</code> means <kbd>ctrl</kbd> and the <code>M</code> means <kbd>alt</kbd> keys + the corresponding symbol.</p>
 <p>Once entered use the keyboard shortcut to <code>writeout</code> <kbd>ctrl</kbd>+<kbd>o</kbd> and then press the <kbd>Enter</kbd> followed by <kbd>ctrl</kbd>+<kbd>x</kbd> to exit the file.</p>
 <p>Some explanation about the above code:</p>
 <ul>
 <li>
-<p>All code gets executed inside of <code>main()</code>, </p>
+<p>All code gets executed inside of <code>main()</code>,</p>
 </li>
 <li>
-<p>For the program to terminate the <code>main()</code> has to have a returnable value, <code>int</code>, </p>
+<p>For the program to terminate the <code>main()</code> has to have a returnable value, <code>int</code>,</p>
 </li>
 <li>
-<p>The keyword at the end of the <code>main()</code> is <code>return</code>, this is will return the value preceeding it, </p>
+<p>The keyword at the end of the <code>main()</code> is <code>return</code>, this is will return the value preceeding it,</p>
 </li>
 <li>
-<p>A <code>0</code> execute means no errors. </p>
+<p>A <code>0</code> execute means no errors.</p>
 </li>
 <li>
-<p>Similar to <code>C#</code> to use libraries <code>c</code> programs import with the <code>#include</code> keyword instead of <code>using</code>. </p>
+<p>Similar to <code>C#</code> to use libraries <code>c</code> programs import with the <code>#include</code> keyword instead of <code>using</code>.</p>
 </li>
 <li>
 <p>The included library is the standard input out header, <code>stdio.h</code>.</p>
@@ -274,13 +274,13 @@ Goodbye World
 </details>
 <hr />
 <h2 id="inputoutput-functions"><a class="header" href="#inputoutput-functions">Input/Output functions</a></h2>
-<p>In C programming, <code>printf()</code> is one of the main output function. The function sends formatted output to the screen. For example, the code below is a modified version of the helloworld programme we wrote a moment ago. </p>
+<p>In C programming, <code>printf()</code> is one of the main output function. The function sends formatted output to the screen. For example, the code below is a modified version of the helloworld programme we wrote a moment ago.</p>
 <p>Create a new file <code>nano inputoutput.c</code> and reproduce the code below:</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;    
 int main()
 { 
     // Displays the string inside quotations
-    printf(&quot;C Programming&quot;);
+    printf("C Programming");
     return 0;
 }
 </code></pre>
@@ -296,16 +296,16 @@ C Programming
 int main()
 {
     int testInteger = 5;
-    printf(&quot;Number = %d&quot;, testInteger);
+    printf("Number = %d", testInteger);
     return 0;
 }
 </code></pre>
 <p>Write out and <kbd>ctrl</kbd>+<kbd>x</kbd> and press <kbd>enter</kbd> twice.</p>
-<p>Run the script again... </p>
+<p>Run the script again...</p>
 <pre><code>$ ./inputoutput.exe
 </code></pre>
-<p>What happened? </p>
-<p>Well we need to recompile the code. </p>
+<p>What happened?</p>
+<p>Well we need to recompile the code.</p>
 <pre><code>$ gcc inputoutput.c -o inputoutput.exe
 $ ./inputoutput.exe
 Number = 5
@@ -320,13 +320,13 @@ int main()
     float number1 = 13.5;
     double number2 = 12.4;
 
-    printf(&quot;number1 = %f\n&quot;, number1);
-    printf(&quot;number2 = %lf&quot;, number2);
+    printf("number1 = %f\n", number1);
+    printf("number2 = %lf", number2);
     return 0;
 }
 </code></pre>
-<p>Compile the code again using format <code>gcc filesource -o fileoutput</code> </p>
-<p>Run it <code>./fileoutput</code>: </p>
+<p>Compile the code again using format <code>gcc filesource -o fileoutput</code></p>
+<p>Run it <code>./fileoutput</code>:</p>
 <pre><code>$ ./inputoutput.exe 
 number1 = 13.500000
 number2 = 12.400000
@@ -338,7 +338,7 @@ number2 = 12.400000
 int main()
 {
     char chr = 'a';    
-    printf(&quot;character = %c&quot;, chr);  
+    printf("character = %c", chr);  
     return 0;
 } 
 </code></pre>
@@ -355,9 +355,9 @@ character = a
 int main()
 {
     int testInteger;
-    printf(&quot;Enter an integer: &quot;);
-    scanf(&quot;%d&quot;, &amp;testInteger);  
-    printf(&quot;Number = %d&quot;,testInteger);
+    printf("Enter an integer: ");
+    scanf("%d", &amp;testInteger);  
+    printf("Number = %d",testInteger);
     return 0;
 }
 </code></pre>
@@ -398,15 +398,15 @@ Number = 4
 <pre><code class="language-c">#include&lt;stdio.h&gt;
 int main(){
 
-    printf(&quot;Data_Types\t\tStorage_Size \n&quot;);
-    printf(&quot;char\t\t\t%d byte(s) \n&quot;, sizeof(char));
-    printf(&quot;int\t\t\t%d byte(s) \n&quot;, sizeof(int));
-    printf(&quot;double\t\t\t%d byte(s) \n&quot;, sizeof(double));
-    printf(&quot;float\t\t\t%d byte(s) \n&quot;, sizeof(float));
-    printf(&quot;unsigned char\t\t%ld byte(s) \n&quot;, sizeof(unsigned char));
-    printf(&quot;long\t\t\t%d byte(s) \n&quot;, sizeof(long));
-    printf(&quot;unsigned long\t\t%ld byte(s) \n&quot;, sizeof(unsigned long));
-    printf(&quot;long double\t\t%ld byte(s) \n&quot;, sizeof(long double));
+    printf("Data_Types\t\tStorage_Size \n");
+    printf("char\t\t\t%d byte(s) \n", sizeof(char));
+    printf("int\t\t\t%d byte(s) \n", sizeof(int));
+    printf("double\t\t\t%d byte(s) \n", sizeof(double));
+    printf("float\t\t\t%d byte(s) \n", sizeof(float));
+    printf("unsigned char\t\t%ld byte(s) \n", sizeof(unsigned char));
+    printf("long\t\t\t%d byte(s) \n", sizeof(long));
+    printf("unsigned long\t\t%ld byte(s) \n", sizeof(unsigned long));
+    printf("long double\t\t%ld byte(s) \n", sizeof(long double));
 
     return 0;
 }
@@ -414,7 +414,7 @@ int main(){
 </code></pre>
 <pre><code>gcc dataTypeSize.c -o dataTypeSize.exe
 </code></pre>
-<p>Now enter the following to see the data types and there available sizes in bytes: </p>
+<p>Now enter the following to see the data types and there available sizes in bytes:</p>
 <pre><code>$ ./dataTypeSize.exe 
 </code></pre>
 <hr />
