@@ -1,0 +1,669 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Revision - COMP1712 Exercises</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Labs</li><li class="chapter-item expanded "><a href="../Labs/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../Bash/Bash_Scripting.html"><strong aria-hidden="true">2.</strong> Bash Scripting</a></li><li class="chapter-item expanded "><a href="../Shell_Commands/Shell_Commands.html"><strong aria-hidden="true">3.</strong> Shell Commands</a></li><li class="chapter-item expanded "><a href="../Learning_C/Learning_C.html"><strong aria-hidden="true">4.</strong> Learning C</a></li><li class="chapter-item expanded "><a href="../ManPages/ManPages.html"><strong aria-hidden="true">5.</strong> Man-Pages</a></li><li class="chapter-item expanded "><a href="../Redirection/Redirection.html"><strong aria-hidden="true">6.</strong> Redirection</a></li><li class="chapter-item expanded "><a href="../Multi-ThreadedScripting-ProcessManagement/Multi-ThreadedScripting-ProcessManagement.html"><strong aria-hidden="true">7.</strong> Multi-Threaded Scripting & Process Management</a></li><li class="chapter-item expanded "><a href="../SystemCalls/SystemCalls.html"><strong aria-hidden="true">8.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="../Revision/Revision.html" class="active"><strong aria-hidden="true">9.</strong> Revision</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Helpers</li><li class="chapter-item expanded "><a href="../Debian_Rock/Debian_Rock.html"><strong aria-hidden="true">10.</strong> Debian Rock</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">COMP1712 Exercises</h1>
+
+                    <div class="right-buttons">
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="revision"><a class="header" href="#revision">Revision</a></h1>
+<p>Content</p>
+<ul>
+<li><a href="#revision">Revision</a>
+<ul>
+<li><a href="#computer-architecture">Computer Architecture</a></li>
+<li><a href="#os">OS</a></li>
+<li><a href="#shell">Shell</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="computer-architecture"><a class="header" href="#computer-architecture">Computer Architecture</a></h2>
+<ol>
+<li>
+<p>Draw a 2-bit register, how would you/ can you make it 4 or 8 bit?</p>
+ <details>
+ <summary>Answer</summary>
+<p><img src="./figures/2-bit-register.png" alt="" /></p>
+<p>You can by repeating the pattern.</p>
+ </details>
+</li>
+<li>
+<p>Write the truth table and symbol diagram of tri-state logic. When do we use tri-state logic in digital logic circuits?</p>
+</li>
+</ol>
+<details>
+<summary>Answer</summary>
+<div>
+<div class="table-wrapper"><table><thead><tr><th>Input</th><th>Enable</th><th>Output</th></tr></thead><tbody>
+<tr><td>0</td><td>0</td><td></td></tr>
+<tr><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td></td></tr>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+</tbody></table>
+</div></div>
+<div align=center>
+<p><img src="./figures/tri-logic-state.png" alt="" /></p>
+</div>
+</details>
+<ol start="3">
+<li>
+<p>A clock cycle has many features, can you identify the triggers, which one is best for synchronisation?</p>
+ <details>
+ <summary>Answer</summary>
+ <div align=center>
+<p><img src="./figures/clock.png" alt="" /></p>
+ </div>
+<ul>
+<li>
+<p>1 triggered when the clock cycle becomes 1</p>
+</li>
+<li>
+<p>0 triggered when the clock cycle becomes 0</p>
+</li>
+<li>
+<p>Positve edge is triggered when the clock cycle changes 0 to 1</p>
+</li>
+<li>
+<p>Negative edge is triggered when the clock cycle changes 1 to 0</p>
+</li>
+<li>
+<p>Rising Edge or falling edge triggers are better in synchronization with the digital circuits as they provide enough time to switch on/off the logic circuit.</p>
+</li>
+</ul>
+ </details>
+</li>
+<li>
+<p>In the context of computer architecture, what is a bus? How many types can you name and define?</p>
+ <details>
+ <summary>Abswer</summary>
+<ul>
+<li>
+<p>A bus is a collection of conductive wires that connect a number of logical elements together, to allow values to be moved from one element to another in the processor. Three main buses are data bus, address bus, and the control bus.</p>
+</li>
+<li>
+<p>Features:-</p>
+<ul>
+<li>
+<p>All control wires of control bus originate from Control Unit of the processor.</p>
+</li>
+<li>
+<p>They represented in logic circuit diagram with dark lines and each line of control bus is uni-directional.</p>
+</li>
+<li>
+<p>Data bus is bi-directional and control bus is uni-directional</p>
+</li>
+</ul>
+</li>
+</ul>
+ </details>
+</li>
+<li>
+<p>Compare and contrast RISC(RISC (Reduced Instruction Set Computing) and CISC (Complex Instruction Set Computing)</p>
+</li>
+</ol>
+<details>
+<summary>Answer</summary>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>CISC</th><th>RISC</th></tr></thead><tbody>
+<tr><td>Instruction Set Complexity</td><td>High: Features a large and complex instruction set with instructions capable of performing multiple operations.</td><td>Low: Emphasizes simplicity with a smaller, more streamlined instruction set where each instruction performs a single operation.</td></tr>
+<tr><td>Instruction Execution</td><td>Variable: Instructions may require multiple clock cycles to execute due to their complexity.</td><td>Uniform: Most instructions execute in a single clock cycle, leading to more predictable performance.</td></tr>
+<tr><td>Microcode Usage</td><td>Common: Utilizes microcode to decode and execute complex instructions.</td><td>Minimal: Relies on hardware implementation for instruction execution, reducing the need for microcode.</td></tr>
+<tr><td>Hardware vs. Software Control</td><td>More reliance on software control for instruction execution, including microcode routines.</td><td>More emphasis on hardware control, with instructions executed directly by the hardware.</td></tr>
+<tr><td>Register Usage</td><td>Moderate: Typically includes a moderate number of general-purpose and special-purpose registers.</td><td>High: Features a larger number of general-purpose registers to optimize performance and reduce memory access.</td></tr>
+</tbody></table>
+</div></details>
+<ol start="6">
+<li>
+<p>RISC computer architecture was developed to address the limitations of CISC computer architecture. What are the main RISC architecture improvements?</p>
+ <details>
+ <summary></summary>
+ 1. **Simplicity and Efficiency**: RISC architectures prioritize simplicity and efficiency by employing a smaller and more streamlined instruction set. This simplicity allows for faster instruction decoding and execution.
+<ol start="2">
+<li>
+<p><strong>Uniform Instruction Format</strong>: RISC architectures typically have a uniform instruction format, where each instruction is of fixed length and performs a single operation. This uniformity simplifies instruction decoding and pipelining.</p>
+</li>
+<li>
+<p><strong>Increased Register Usage</strong>: RISC architectures often feature a larger number of general-purpose registers compared to CISC architectures. More registers allow for more operations to be performed directly on data in registers, reducing the need for memory accesses.</p>
+</li>
+<li>
+<p><strong>Load/Store Architecture</strong>: RISC architectures commonly use a load/store architecture, where memory access is restricted to specific load and store instructions. This approach simplifies instruction decoding and improves performance by reducing memory traffic.</p>
+</li>
+<li>
+<p><strong>Optimized Pipelining</strong>: RISC architectures are designed to facilitate efficient pipelining of instructions. With simpler instructions and a regular 5. instruction format, RISC processors can achieve higher throughput and better performance through pipelining.</p>
+</li>
+<li>
+<p><strong>Faster Clock Speeds</strong>: The simplicity of RISC instruction sets and architectures allows for higher clock speeds compared to CISC architectures. This enables RISC processors to achieve better performance in terms of instructions per cycle.</p>
+</li>
+<li>
+<p><strong>Reduced Hardware Complexity</strong>: RISC architectures often have reduced hardware complexity compared to CISC architectures, resulting in smaller and more cost-effective processor designs.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>In summary:</p>
+<ul>
+<li>
+<p>More general purpose register, typical 32</p>
+</li>
+<li>
+<p>A limited, uniform, and faster instruction set</p>
+</li>
+<li>
+<p>Very limited addressing modes</p>
+</li>
+<li>
+<p>Hardware compiler support</p>
+</li>
+<li>
+<p>Hardwired control unit</p>
+</li>
+</ul>
+</li>
+</ul>
+ </details>
+</li>
+<li>
+<p>Hybrid computer architectures have taken over the computer system consumer market. What is a Modern hybrid architecture?</p>
+ <details>
+ <summary>Answ  - [Android Architecture](#android-architecture)
+</li>
+</ol>
+<ul>
+<li>
+<p><a href="#android-permissions-etc">Android Permissions etc</a></p>
+</li>
+<li>
+<p><a href="#data-structures">Data structures</a>opriate. For example Intel Pentium Pro processor families roots are with CISC but it uses both CISC and RISC features. Intel X86 origin is RISC architecture but they also use same hybrid architecture approach and remain backwardly compatible to run millions of old programmes of this processor family</p>
+</details>
+</li>
+</ul>
+<ol start="8">
+<li>
+<p>Computer systems are improving continuously. Describe Advanced Architectures features.</p>
+ <details>
+ <summary></summary>
+<p>There is continuous development in the advanced processors to run programs as fast as possible, as cheap as possible. All von Neumann processors used in mobile phone, microwave, TV, desktop. Our aim is to design high speed and low cost processors. Following are the few advanced features that can run programs more efficiently:</p>
+<ul>
+<li>
+<p>Increasing Clock Speed</p>
+</li>
+<li>
+<p>Adding Specialised Instructions</p>
+</li>
+<li>
+<p>Moving Memory into Processor</p>
+</li>
+<li>
+<p>Running More Instructions Per Clock Cycle</p>
+</li>
+<li>
+<p>Adding More Processors</p>
+</li>
+</ul>
+ </details>
+</li>
+<li>
+<p>Superscalar multiprocessor computers use several modern techniques to improve the performance of computer systems. Explain how pipelining in superscalar multiprocessor computer architecture works.</p>
+ <details>
+ <summary></summary>
+<p>Pipelining in advanced superscalar architecture involves dividing up the functional aspects of the processor into distinct stages, where each stage is designed to perform its function in one clock cycle and pass data on to the next stage. This architecture has duplicate components within it. Duplicating the pipelines such that a processor has two or more pipelines the processor can achieve greater throughput of instructions.</p>
+ </details>
+</li>
+</ol>
+<h2 id="os"><a class="header" href="#os">OS</a></h2>
+<ul>
+<li>
+<p><a href="#android-architecture">Android Architecture</a></p>
+</li>
+<li>
+<p><a href="#android-permissions-etc">Android Permissions etc</a></p>
+</li>
+<li>
+<p><a href="#data-structures">Data structures</a></p>
+<ul>
+<li>
+<p><strong>BIOS Stage</strong>:</p>
+<ul>
+<li>When the machine is powered on BIOS is the first one to be called to verify if the hardware is present in the machine and if it is functioning.​</li>
+<li>After a successful test, BIOS checks the MBR (Master Boot Record) in the hard disk to check if it refers to the location of the boot loader.​</li>
+</ul>
+</li>
+<li>
+<p><strong>Bootloader Stage</strong></p>
+<ul>
+<li>The boot loader will present the user with a list of menu entries, each of which corresponds to different operating system​</li>
+<li>The boot loader will then start to boot the operating system</li>
+<li>Which is loaded into the <strong>initrd</strong> or <strong>initrfs</strong></li>
+<li>A virtual instance of the root file system is mounted</li>
+<li>all hardware, drivers and mass storage are probed for the kernel</li>
+</ul>
+</li>
+<li>
+<p><strong>Kernel Stage</strong></p>
+<ul>
+<li>In the kernel stage of the Linux boot sequence, the Linux kernel based on the result of <strong>linuxrc</strong> can then mount the real root file system​</li>
+<li>The real root file system in Linux is referenced as "/" and it is where all other sub-directories and files visible when Linux is running exist​</li>
+<li>init process is spawned and all daemons.</li>
+</ul>
+</li>
+</ul>
+<p><img src="./figures/allbootprocess.png" alt="" /></p>
+</details>
+</li>
+</ul>
+<ol>
+<li>
+<p>What are the components of a Linux operating system?</p>
+<details>
+<summary>Answer</summary>
+- Kernel
+- System Library
+- System Utility
+- User Application
+- Hardware Platform
+</details>
+</li>
+<li>
+<p>List the different types of operating systems.</p>
+<details>
+<summary>Answer</summary>
+<ul>
+<li>Batch operating system.</li>
+<li>Embedded operating system.</li>
+<li>Distributed operating system.</li>
+<li>Multi-processing/tasking operating system.</li>
+<li>Network operating system.</li>
+<li>Real-time operating system.</li>
+<li>Time-sharing operating system.</li>
+</ul>
+</details>
+</li>
+<li>
+<p>What is the difference between hard and soft <em>real-time</em> systems?</p>
+<details>
+<summary>Answer</summary>
+<ul>
+<li>
+<p>A <strong>Soft RTOS</strong> is a system in which the deadline for certain tasks can be delayed to some extent. For example, if the task deadline is 1:20:30PM, then the task can on occasion completed at let us say 1:20:35PM. However, it can not delay for too long say 1:30PM.​</p>
+</li>
+<li>
+<p>A <strong>Hard RTOS</strong> is a system that meets the deadline for every process at all times. For example, if the task deadline is 1:20:30PM, then the task has to be completed before 1:20:30PM every time.​</p>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<p>Explain the following:</p>
+<ul>
+<li>
+<p>Login Manager</p>
+  <details>
+  <summary>Answer</summary>
+<ul>
+<li>Manage user authentication at login.</li>
+<li>Present login screen for entering credentials.</li>
+</ul>
+  </details>
+</li>
+<li>
+<p>Display Manager</p>
+  <details>
+  <summary>Answer</summary>
+<ul>
+<li>Control the display server connection.</li>
+<li>Facilitate user sessions.</li>
+</ul>
+  </details>
+</li>
+<li>
+<p>Desktop Manager</p>
+  <details>
+  <summary>Answer</summary>
+<ul>
+<li>Integrated suite of applications and tool<strong>Regular Expressions</strong>.</li>
+<li>Provides a cohesive user interface.</li>
+</ul>
+  </details>
+</li>
+<li>
+<p>Windows Manager</p>
+  <details>
+  <summary>Answer</summary>
+<ul>
+<li>Control the placement and appearance of windows.</li>
+<li>Handle window decorations, title bars, and borders.</li>
+</ul>
+  </details>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="shell"><a class="header" href="#shell">Shell</a></h2>
+<ol start="15">
+<li>
+<p>Explain the following output, breaking down each part into its sub-components.</p>
+<pre><code class="language-sh">.rwxrw--wx Linux users
+</code></pre>
+<details>
+<summary>Answer</summary>
+<ul>
+<li><code>.</code> means a file in situ of its directory</li>
+<li><code>rwx</code> are the permissions for that file, <code>r</code> = read, <code>w</code> = write, <code>x</code> = execute</li>
+<li>the <code>-</code> means that permission is revoked</li>
+<li>the permissions format is user, group, and rest of the word
+<ul>
+<li>user has read, write, and execute</li>
+<li>group has read and write</li>
+<li>rest of the world has write and execute</li>
+</ul>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<p>What is the difference between <code>.</code>, <code>d</code> and <code>l</code> when referring to file permissions </p>
+<summary>Answer</summary>
+<ul>
+<li><code>.</code> means a file in-situ of its directory</li>
+<li><code>d</code> means a directory</li>
+<li><code>l</code> means a link to another place.</li>
+</ul>
+</details>**Regular Expressions**
+<details>
+<summary>Answer</summary>
+<ul>
+<li><code>1000</code> is passed to the <code>sleep</code> command which tells the current shell input/ouput to wait 1000 seconds.</li>
+<li>the <code>&amp;</code> puts the process in the background so the user can continue using the CLI if needed.</li>
+<li>any process put in the background using <code>&amp;</code> will return the process ID for the user to take reference of.</li>
+</ul>
+</details>
+</li>
+<li>
+<p>Explain how the following two lines when the script is invoked from the CLI:</p>
+<ul>
+<li>shebang one
+<pre><code class="language-sh">#! /usr/bin/env cat
+</code></pre>
+</li>
+<li>shebang two
+<pre><code class="language-sh">#! /usr/bin/env bash
+</code></pre>
+</li>
+<li><code>TestScript.sh</code>
+<pre><code class="language-sh"># Put the shebang here...
+
+cat /etc/os-release | grep -m 1 "NAME=" | awk -f '=' '{print$2}' 
+</code></pre>
+</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<ul>
+<li>
+<p><code>/usr/bin/env cat</code> tells the interpreter to find the env path for <code>cat</code> and reinvokes <code>TestScript.sh</code></p>
+<ul>
+<li><code>#! /usr/bin/env cat TestScript.sh</code></li>
+<li>which in turn concatenates <code>TestScript.sh</code> to standard out.</li>
+</ul>
+</li>
+<li>
+<p><code>/usr/bin/env bash</code> tells the interpreter to find the env path for <code>bash</code> and reinvokes <code>TestScript.sh</code></p>
+<ul>
+<li><code>#! /usr/bin/env bash TestScript.sh</code></li>
+<li>which in turn runs the commands inside <code>TestScript.sh</code> to standard out.</li>
+<li>The command outputs the  name of the OS by con<code>cat</code>enating the file <code>/etc/os-release</code></li>
+<li>standard out is piped to <code>grep</code> which finds the first instance of any pattern matching "<code>NAME=</code>".</li>
+<li>This is passed to <code>awk</code> which separates the <code>NAME=....</code> by the <code>=</code> as a delimiter.</li>
+<li><code>awk</code> then prints the second field to standard out. Which in this case would be the OS's name.</li>
+</ul>
+</li>
+</ul>
+</details>
+</li>
+<li>
+<p>What does <code>&gt;</code> and <code>&gt;&gt;</code> mean? Illustrate with the following example:</p>
+<pre><code class="language-sh">$ ls -l ~/currentuser/ &gt; file
+$ ls -l ~/currentuser/ &gt;&gt; file
+</code></pre>
+<details>
+<summary>Answer</summary>
+<ul>
+<li><code>&gt;</code> redirects standard out to write to a file and overwrites any content therein.</li>
+<li><code>&gt;&gt;</code> redirects standard out to append to the end of the file, this will not overwrite.</li>
+<li>The first time the file's content contains the list of the <code>currentuser</code> directory</li>
+<li>The second time the file is appended and now contains a list of the directory contents twice</li>
+</ul>
+</details>
+</li>
+<li>
+<p>What is the POSIX and provide some features.</p>
+<details>
+<summary>Answer</summary>
+<ul>
+<li>POSIX (Portable Operating System Interface) is a set of standard operating system interfaces based on the Unix operating system</li>
+<li><strong>Aliases</strong>, creating a single command word for complex commands</li>
+<li><strong>C API</strong>, programs are portable to other operating systems at the source code level</li>
+<li><strong>File Formats</strong>, for formatting strings that we use in files, standard output, standard error, and standard input.</li>
+<li>Setting <strong>Environment Variables</strong>, like <code>PATH</code> or <code>HOME</code></li>
+<li>Creation and standardisation of <strong>Regular Expressions</strong> for pattern matching.</li>
+<li>standardised <strong>utility names</strong>, <code>name_of_utility [-a] [-b] [-c option_argument] &lt;parameter name&gt;</code></li>
+<li><strong>Directory Structure</strong>, is Hierarchical where root, <code>/</code> is the parent</li>
+</ul>
+</details></li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../SystemCalls/SystemCalls.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Debian_Rock/Debian_Rock.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../SystemCalls/SystemCalls.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Debian_Rock/Debian_Rock.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
