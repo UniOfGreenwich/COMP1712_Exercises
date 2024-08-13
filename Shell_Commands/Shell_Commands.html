@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Labs</li><li class="chapter-item expanded "><a href="../Labs/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../Bash/Bash_Scripting.html"><strong aria-hidden="true">2.</strong> Bash Scripting</a></li><li class="chapter-item expanded "><a href="../Shell_Commands/Shell_Commands.html" class="active"><strong aria-hidden="true">3.</strong> Shell Commands</a></li><li class="chapter-item expanded "><a href="../Learning_C/Learning_C.html"><strong aria-hidden="true">4.</strong> Learning C</a></li><li class="chapter-item expanded "><a href="../ManPages/ManPages.html"><strong aria-hidden="true">5.</strong> Man-Pages</a></li><li class="chapter-item expanded "><a href="../Redirection/Redirection.html"><strong aria-hidden="true">6.</strong> Redirection</a></li><li class="chapter-item expanded "><a href="../Multi-ThreadedScripting-ProcessManagement/Multi-ThreadedScripting-ProcessManagement.html"><strong aria-hidden="true">7.</strong> Multi-Threaded Scripting & Process Management</a></li><li class="chapter-item expanded "><a href="../SystemCalls/SystemCalls.html"><strong aria-hidden="true">8.</strong> System Calls</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">9.</strong> Revision</div></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Helpers</li><li class="chapter-item expanded "><a href="../Debian_Rock/Debian_Rock.html"><strong aria-hidden="true">10.</strong> Debian Rock</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Labs</li><li class="chapter-item expanded "><a href="../Labs/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../Bash/Bash_Scripting.html"><strong aria-hidden="true">2.</strong> Bash Scripting</a></li><li class="chapter-item expanded "><a href="../Shell_Commands/Shell_Commands.html" class="active"><strong aria-hidden="true">3.</strong> Shell Commands</a></li><li class="chapter-item expanded "><a href="../ManPages/ManPages.html"><strong aria-hidden="true">4.</strong> Man-Pages</a></li><li class="chapter-item expanded "><a href="../Redirection/Redirection.html"><strong aria-hidden="true">5.</strong> Redirection</a></li><li class="chapter-item expanded "><a href="../Multi-ThreadedScripting-ProcessManagement/Multi-ThreadedScripting-ProcessManagement.html"><strong aria-hidden="true">6.</strong> Multi-Threaded Scripting & Process Management</a></li><li class="chapter-item expanded "><a href="../SystemCalls/SystemCalls.html"><strong aria-hidden="true">7.</strong> System Calls</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Helpers</li><li class="chapter-item expanded "><a href="../Debian_Rock/Debian_Rock.html"><strong aria-hidden="true">8.</strong> Debian Rock</a></li><li class="chapter-item expanded "><a href="../Shell_Style_Guide/shellstyleguide.html"><strong aria-hidden="true">9.</strong> Shell Style Guide</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -172,176 +172,6 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="shell-commands"><a class="header" href="#shell-commands">Shell Commands</a></h1>
-<hr />
-<h2 id="1-dates"><a class="header" href="#1-dates">1. Dates</a></h2>
-<ol>
-<li>
-<p>First run the <code>date</code> command in the terminal.</p>
-<pre><code class="language-sh">$ date
-</code></pre>
-<p><strong>Output:</strong> will be something like this...</p>
-<pre><code class="language-sh">Mon 27 Feb 13:58:41 GMT 2023
-</code></pre>
-</li>
-<li>
-<p>So how do we get different formats?</p>
-<p>Well if in doubt you can check the <code>man</code> pages or use the commands <code>--help</code> flag</p>
-<pre><code class="language-sh">$ date --help
-</code></pre>
-</li>
-<li>
-<p>Looking at the output workout how to produce this format:</p>
-<pre><code class="language-sh">&gt; 20230227
-</code></pre>
-<details>
-<summary>Answer</summary>
-<pre><code class="language-sh">date +"%Y%m%d"
-</code></pre>
-</details>
-</li>
-<li>
-<p>Now modify this output to display:</p>
-<pre><code class="language-sh">&gt; Year: 2023, Month: 02, Day: 27
-</code></pre>
-<details>
-<summary>Answer</summary>
-<pre><code class="language-sh">date +"Year: %Y, Month: %m, Day: %d"
-</code></pre>
-</details>
-</li>
-<li>
-<p>The most common formatting characters:</p>
-<ul>
-<li><code>%D</code> – Display date as mm/dd/yy</li>
-<li><code>%Y</code> – Year (e.g., 2020)</li>
-<li><code>%m</code> – Month (01-12)</li>
-<li><code>%B</code> – Long month name (e.g., November)</li>
-<li><code>%b</code> – Short month name (e.g., Nov)</li>
-<li><code>%d</code> – Day of month (e.g., 01)</li>
-<li><code>%j</code> – Day of year (001-366)</li>
-<li><code>%u</code> – Day of week (1-7)</li>
-<li><code>%A</code> – Full weekday name (e.g., Friday)</li>
-<li><code>%a</code> – Short weekday name (e.g., Fri)</li>
-<li><code>%H</code> – Hour (00-23)</li>
-<li><code>%I</code> – Hour (01-12)</li>
-<li><code>%M</code> – Minute (00-59)</li>
-<li><code>%S</code> – Second (00-60)</li>
-</ul>
-</li>
-<li>
-<p>Using the above information and what previous steps reproduce the ISO 8601 standard for datetime.</p>
-<pre><code class="language-sh">&gt; 2023-02-27T12:08:45Z
-</code></pre>
-<details>
-<summary>Answer</summary>
-<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ"
-</code></pre>
-<ul>
-<li><code>%Y</code> – Year (e.g., 2020)</li>
-<li><code>%m</code> – Month (01-12)</li>
-<li><code>%d</code> – Day of month (e.g., 01)</li>
-<li><code>T</code> – self delimeter</li>
-<li><code>%H</code> – Hour (00-23)</li>
-<li><code>:</code> – self delimeter</li>
-<li><code>%M</code> – Minute (00-59)</li>
-<li><code>:</code> – self delimeter</li>
-<li><code>%S</code> – Second (00-60)</li>
-<li><code>Z</code> – self delimeter</li>
-</ul>
-</details>
-</li>
-<li>
-<p>Amend the last command so that after seconds you get nano seconds.</p>
-<pre><code class="language-sh">&gt; 2023-02-27T12:14:03:281999558Z
-</code></pre>
-<details>
-<summary>Answer</summary>
-<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ"
-</code></pre>
-<ul>
-<li><code>%Y</code> – Year (e.g., 2020)</li>
-<li><code>%m</code> – Month (01-12)</li>
-<li><code>%d</code> – Day of month (e.g., 01)</li>
-<li><code>T</code> – self delimeter</li>
-<li><code>%H</code> – Hour (00-23)</li>
-<li><code>:</code> – self delimeter</li>
-<li><code>%M</code> – Minute (00-59)</li>
-<li><code>:</code> – self delimeter</li>
-<li><code>%S</code> – Second (00-60)</li>
-<li><code>:</code> – self delimeter</li>
-<li><code>%N</code> – nanoseconds (000000000..999999999)</li>
-<li><code>Z</code> – self delimeter</li>
-</ul>
-</details>
-</li>
-</ol>
-<hr />
-<h2 id="task-2-manipulating-inputs-and-outputs"><a class="header" href="#task-2-manipulating-inputs-and-outputs">Task 2. Manipulating inputs and outputs</a></h2>
-<ol>
-<li>
-<p>working with the previous command lets strip out the <code>T</code>,<code>:</code>s and <code>Z</code> so that we are left with only numnbers.</p>
-</li>
-<li>
-<p>Using <code>awk</code> we can manipulate the output by piping <code>|</code> the output of <code>date</code> into awk
-- first run this command</p>
-<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk "{print $1}" 
-&gt; 2023-02-27T12:20:40:005619503Z   
-</code></pre>
-<ul>
-<li><code>awk</code> with the argument <code>print $1</code> will print the first argument... ie the output of <code>date</code></li>
-</ul>
-</li>
-<li>
-<p>Now lets remove the <code>T</code></p>
-<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F 'T' '{print $1}'
-&gt; 2023-02-27
-</code></pre>
-</li>
-<li>
-<p>What happens when you do $2 on the same command as above?</p>
-<details>
-<summary>Answer</summary>
-<pre><code class="language-sh">&gt; 12:50:48:341942600Z
-</code></pre>
-<p>This is because the input has been split and now</p>
-<ul>
-<li>$1 = 2023-02-27</li>
-<li>$2 = 12:20:40:005619503Z</li>
-</ul>
-</details>
-</li>
-<li>
-<p>Change the delimeter <code>-F 'T'</code> to <code>-F ':'</code> and repeat both steps as before:</p>
-<details>
-<summary>Answer</details>
-<pre><code class="language-sh">$  date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $1}'
-&gt;  2023-02-27T12
-</code></pre>
-<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $2}'
-  55
-$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $3}'
-  32
-$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $4}'
-  473072761Z
-</code></pre>
-</details>
-</li>
-<li>
-<p>You can put these together using the print {$2$3$4$}, try.
-<code>sh      date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $2$3$4}'      5719707652042Z      </code></p>
-</li>
-<li>
-<p>Experiment with this and consider piping with awk to see if you can get:</p>
-<pre><code class="language-sh">20230227130026355420256
-</code></pre>
-<details>
-<summary>Answer</summary>
-<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F '[-T:Z]' '{print $1$2$3$4$5$6$7$8$9}'
-20230227130026355420256
-</code></pre>
-</details>
-</li>
-</ol>
 
                     </main>
 
@@ -351,7 +181,7 @@ $ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $4}'
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../Learning_C/Learning_C.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../ManPages/ManPages.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -365,7 +195,7 @@ $ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $4}'
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../Learning_C/Learning_C.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../ManPages/ManPages.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
