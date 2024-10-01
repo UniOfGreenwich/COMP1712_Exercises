@@ -3,7 +3,7 @@
 
 - [Introduction](./Labs/Introduction.md)
 - [Shell Commands](./Shell_Commands/Shell_Commands.md)
-- [Bash Scripting]()
+- [Bash Scripting](./Bash/Bash_Scripting.md)
 - [Learning C]()
 - [Man-Pages]()
 - [Redirection]()
