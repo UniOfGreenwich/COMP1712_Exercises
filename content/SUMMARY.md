@@ -4,11 +4,9 @@
 - [Introduction](./Labs/Introduction.md)
 - [Shell Commands](./Shell_Commands/Shell_Commands.md)
 - [Bash Scripting](./Bash/Bash_Scripting.md)
-- [Learning C]()
-- [Man-Pages]()
-- [Redirection]()
+- [Man-Pages](./ManPages/ManPages.md)
+- [Redirection](./Redirection/Redirection.md)
 - [Multi-Threaded Scripting & Process Management]()
-- [System Calls]()
 
 -------------
 
