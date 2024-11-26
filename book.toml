@@ -1,12 +1,17 @@
 [book]
 authors = ["Seb Blair"]
-title = "COMP1712 Exercises"
+title = "Computer Architecture and Operating Systems"
 language = "en"
 multilingual = false
 src = "content"
 
+[preprocessor.pagetoc]
 [output.html]
 mathjax-support = true
+git-repository-url = "https://github.com/uniofgreenwich/COMP1712_Exercises"
+edit-url-template = "https://github.com/uniofgreenwich/COMP1712_Exercises/edit/main/{path}"
+additional-css = ["theme/pagetoc.css"]
+additional-js  = ["theme/pagetoc.js"]
 
 [output.html.print]
 enable = false 
