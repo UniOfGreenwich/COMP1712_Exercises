@@ -1,0 +1,701 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Shell Commands - Computer Architecture and Operating Systems</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="burgundy">Burgundy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="dracula">Dracula</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ecoFriend">EcoFriend</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="pinkrose">Pinkrose</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="space">Space</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="sustain">Sustain</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="tokyonight">Tokyonight</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Computer Architecture and Operating Systems</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://github.com/uniofgreenwich/COMP1712_Exercises" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/uniofgreenwich/COMP1712_Exercises/edit/main/content/Shell_Commands/Shell_Commands.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <h1 id="shell-commands"><a class="header" href="#shell-commands">Shell Commands</a></h1>
+<p>As said in the lecture shell commands....</p>
+<p>To successfully make use of a terminal and to become competent, knowing the commonly used posix and gnu-core-utils packages are paramount. It is a tall order to learn every package, out there, for instance the nixos package manager has over 80,000 packages!</p>
+<p>So below is a sample of useful packages to become familar with.</p>
+<hr />
+<h2 id="1-navigating-the-file-system"><a class="header" href="#1-navigating-the-file-system">1. Navigating the File System</a></h2>
+<h3 id="11-pwd-print-working-directory"><a class="header" href="#11-pwd-print-working-directory">1.1 <code>pwd</code> (Print Working Directory)</a></h3>
+<p><strong>Description</strong>: Displays the current directory.</p>
+<pre><code class="language-bash">pwd
+</code></pre>
+<p><strong>Example</strong>:</p>
+<ol>
+<li>Open your terminal.</li>
+<li>Type <code>pwd</code> and press Enter.</li>
+<li>You will see the full path of the directory you’re currently in, like <code>/home/user</code>.</li>
+</ol>
+<hr />
+<h3 id="12-cd-change-directory"><a class="header" href="#12-cd-change-directory">1.2 <code>cd</code> (Change Directory)</a></h3>
+<p><strong>Description</strong>: Changes the working directory.</p>
+<pre><code class="language-bash">cd [directory]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>To move to the <code>/home</code> directory:
+<pre><code class="language-bash">cd /home
+</code></pre>
+</li>
+<li>To go back to the previous directory:
+<pre><code class="language-bash">cd -
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="13-ls-list-directory-contents"><a class="header" href="#13-ls-list-directory-contents">1.3 <code>ls</code> (List Directory Contents)</a></h3>
+<p><strong>Description</strong>: Lists files and directories.</p>
+<pre><code class="language-bash">ls [options] [directory]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>List all files in the current directory:
+<pre><code class="language-bash">ls
+</code></pre>
+</li>
+<li>List hidden files:
+<pre><code class="language-bash">ls -a
+</code></pre>
+</li>
+<li>Show detailed information (file size, permissions, etc.):
+<pre><code class="language-bash">ls -l
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="2-file-operations"><a class="header" href="#2-file-operations">2. File Operations</a></h2>
+<h3 id="21-cp-copy-files"><a class="header" href="#21-cp-copy-files">2.1 <code>cp</code> (Copy Files)</a></h3>
+<p><strong>Description</strong>: Copies files or directories.</p>
+<pre><code class="language-bash">cp [source] [destination]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>Copy a file:
+<pre><code class="language-bash">cp file.txt /backup/file.txt
+</code></pre>
+</li>
+<li>Copy a directory:
+<pre><code class="language-bash">cp -r /source/dir /backup/dir
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="22-mv-moverename-files"><a class="header" href="#22-mv-moverename-files">2.2 <code>mv</code> (Move/Rename Files)</a></h3>
+<p><strong>Description</strong>: Moves or renames files.</p>
+<pre><code class="language-bash">mv [source] [destination]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>Move a file:
+<pre><code class="language-bash">mv file.txt /backup/file.txt
+</code></pre>
+</li>
+<li>Rename a file:
+<pre><code class="language-bash">mv oldname.txt newname.txt
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="23-rm-remove-files"><a class="header" href="#23-rm-remove-files">2.3 <code>rm</code> (Remove Files)</a></h3>
+<p><strong>Description</strong>: Deletes files or directories.</p>
+<pre><code class="language-bash">rm [options] [file/directory]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>Remove a file:
+<pre><code class="language-bash">rm file.txt
+</code></pre>
+</li>
+<li>Remove a directory:
+<pre><code class="language-bash">rm -r /path/to/directory
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="3-file-permissions"><a class="header" href="#3-file-permissions">3. File Permissions</a></h2>
+<h3 id="31-chmod-change-file-permissions"><a class="header" href="#31-chmod-change-file-permissions">3.1 <code>chmod</code> (Change File Permissions)</a></h3>
+<p><strong>Description</strong>: Changes permissions of a file or directory.</p>
+<pre><code class="language-bash">chmod [options] [permissions] [file/directory]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>Make a file executable:
+<pre><code class="language-bash">chmod +x script.sh
+</code></pre>
+</li>
+<li>Set specific permissions (e.g., read-write for owner, read for others):
+<pre><code class="language-bash">chmod 644 file.txt
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="32-chown-change-file-ownership"><a class="header" href="#32-chown-change-file-ownership">3.2 <code>chown</code> (Change File Ownership)</a></h3>
+<p><strong>Description</strong>: Changes the owner of a file or directory.</p>
+<pre><code class="language-bash">chown [owner][:group] [file/directory]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>Change owner:
+<pre><code class="language-bash">chown newuser file.txt
+</code></pre>
+</li>
+<li>Change owner and group:
+<pre><code class="language-bash">chown newuser:newgroup file.txt
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="4-searching-and-finding-files"><a class="header" href="#4-searching-and-finding-files">4. Searching and Finding Files</a></h2>
+<h3 id="41-find-search-for-files"><a class="header" href="#41-find-search-for-files">4.1 <code>find</code> (Search for Files)</a></h3>
+<p><strong>Description</strong>: Searches for files in a directory hierarchy.</p>
+<pre><code class="language-bash">find [path] [options]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>Find all <code>.txt</code> files in the current directory:
+<pre><code class="language-bash">find . -name "*.txt"
+</code></pre>
+</li>
+<li>Find files modified in the last 7 days:
+<pre><code class="language-bash">find /path -mtime -7
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="42-grep-search-text-in-files"><a class="header" href="#42-grep-search-text-in-files">4.2 <code>grep</code> (Search Text in Files)</a></h3>
+<p><strong>Description</strong>: Searches for a pattern in files.</p>
+<pre><code class="language-bash">grep [options] [pattern] [file]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>Search for "hello" in a file:
+<pre><code class="language-bash">grep "hello" file.txt
+</code></pre>
+</li>
+<li>Search recursively in a directory:
+<pre><code class="language-bash">grep -r "hello" /path/to/directory
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="5-disk-usage"><a class="header" href="#5-disk-usage">5. Disk Usage</a></h2>
+<h3 id="51-df-disk-free"><a class="header" href="#51-df-disk-free">5.1 <code>df</code> (Disk Free)</a></h3>
+<p><strong>Description</strong>: Displays disk space usage.</p>
+<pre><code class="language-bash">df [options]
+</code></pre>
+<p><strong>Example</strong>:</p>
+<ol>
+<li>Check disk usage in human-readable format:
+<pre><code class="language-bash">df -h
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="52-du-disk-usage"><a class="header" href="#52-du-disk-usage">5.2 <code>du</code> (Disk Usage)</a></h3>
+<p><strong>Description</strong>: Shows the size of files and directories.</p>
+<pre><code class="language-bash">du [options] [file/directory]
+</code></pre>
+<p><strong>Example</strong>:</p>
+<ol>
+<li>Check the size of a directory:
+<pre><code class="language-bash">du -sh /path/to/directory
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="6-process-management"><a class="header" href="#6-process-management">6. Process Management</a></h2>
+<h3 id="61-ps-process-status"><a class="header" href="#61-ps-process-status">6.1 <code>ps</code> (Process Status)</a></h3>
+<p><strong>Description</strong>: Shows information about active processes.</p>
+<pre><code class="language-bash">ps [options]
+</code></pre>
+<p><strong>Example</strong>:</p>
+<ol>
+<li>Show all running processes:
+<pre><code class="language-bash">ps aux
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="62-kill-terminate-processes"><a class="header" href="#62-kill-terminate-processes">6.2 <code>kill</code> (Terminate Processes)</a></h3>
+<p><strong>Description</strong>: Sends a signal to a process (usually to terminate it).</p>
+<pre><code class="language-bash">kill [options] [process_id]
+</code></pre>
+<p><strong>Example</strong>:</p>
+<ol>
+<li>Kill a process with PID 1234:
+<pre><code class="language-bash">kill 1234
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="7-networking"><a class="header" href="#7-networking">7. Networking</a></h2>
+<h3 id="71-ping-check-network-connectivity"><a class="header" href="#71-ping-check-network-connectivity">7.1 <code>ping</code> (Check Network Connectivity)</a></h3>
+<p><strong>Description</strong>: Sends ICMP echo requests to test network connectivity.</p>
+<pre><code class="language-bash">ping [host]
+</code></pre>
+<p><strong>Example</strong>:</p>
+<ol>
+<li>Ping Google to check internet connectivity:
+<pre><code class="language-bash">ping google.com
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="72-ifconfig--ip-network-interface-configuration"><a class="header" href="#72-ifconfig--ip-network-interface-configuration">7.2 <code>ifconfig</code> / <code>ip</code> (Network Interface Configuration)</a></h3>
+<p><strong>Description</strong>: Displays or configures network interfaces.</p>
+<pre><code class="language-bash">ifconfig [interface]
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash">ip a
+</code></pre>
+<p><strong>Example</strong>:</p>
+<ol>
+<li>Check the network interface configuration:
+<pre><code class="language-bash">ifconfig
+</code></pre>
+</li>
+</ol>
+<p>or</p>
+<pre><code class="language-bash">ip a
+</code></pre>
+<hr />
+<h2 id="8-archiving-and-compression"><a class="header" href="#8-archiving-and-compression">8. Archiving and Compression</a></h2>
+<h3 id="81-tar-create-and-extract-archives"><a class="header" href="#81-tar-create-and-extract-archives">8.1 <code>tar</code> (Create and Extract Archives)</a></h3>
+<p><strong>Description</strong>: Creates or extracts archives.</p>
+<pre><code class="language-bash">tar [options] [archive] [file/directory]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>Create a <code>.tar.gz</code> archive:
+<pre><code class="language-bash">tar -czvf archive.tar.gz /path/to/directory
+</code></pre>
+</li>
+<li>Extract a <code>.tar.gz</code> archive:
+<pre><code class="language-bash">tar -xzvf archive.tar.gz
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="82-gzip--gunzip-compressdecompress-files"><a class="header" href="#82-gzip--gunzip-compressdecompress-files">8.2 <code>gzip</code> / <code>gunzip</code> (Compress/Decompress Files)</a></h3>
+<p><strong>Description</strong>: Compresses or decompresses files using gzip.</p>
+<pre><code class="language-bash">gzip [file]
+</code></pre>
+<pre><code class="language-bash">gunzip [file.gz]
+</code></pre>
+<p><strong>Examples</strong>:</p>
+<ol>
+<li>Compress a file:
+<pre><code class="language-bash">gzip file.txt
+</code></pre>
+</li>
+<li>Decompress a file:
+<pre><code class="language-bash">gunzip file.txt.gz
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="9-text-processing"><a class="header" href="#9-text-processing">9. Text Processing</a></h2>
+<h3 id="91-cat-concatenate-and-display-files"><a class="header" href="#91-cat-concatenate-and-display-files">9.1 <code>cat</code> (Concatenate and Display Files)</a></h3>
+<p><strong>Description</strong>: Displays file contents.</p>
+<pre><code class="language-bash">cat [file]
+</code></pre>
+<p><strong>Example</strong>:</p>
+<ol>
+<li>Display the contents of a file:
+<pre><code class="language-bash">cat file.txt
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="92-head--tail-view-beginning-or-end-of-files"><a class="header" href="#92-head--tail-view-beginning-or-end-of-files">9.2 <code>head</code> / <code>tail</code> (View Beginning or End of Files)</a></h3>
+<p><strong>Description</strong>: Displays the first or last lines of a file.</p>
+<pre><code class="language-bash">head [file]
+</code></pre>
+<pre><code class="language-bash">tail [file]
+</code></pre>
+<p><strong>Example</strong>:</p>
+<ol>
+<li>Display the first 10 lines of a file:
+<pre><code class="language-bash">head file.txt
+</code></pre>
+</li>
+<li>Display the last 10 lines of a file:
+<pre><code class="language-bash">tail file.txt
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="10-dates"><a class="header" href="#10-dates">10. Dates</a></h2>
+<ol>
+<li>
+<p>First run the <code>date</code> command in the terminal.</p>
+<pre><code class="language-sh">$ date
+</code></pre>
+<p><strong>Output:</strong> will be something like this...</p>
+<pre><code class="language-sh">Mon 27 Feb 13:58:41 GMT 2023
+</code></pre>
+</li>
+<li>
+<p>So how do we get different formats?</p>
+<p>Well if in doubt you can check the <code>man</code> pages or use the commands <code>--help</code> flag</p>
+<pre><code class="language-sh">$ date --help
+</code></pre>
+</li>
+<li>
+<p>Looking at the output workout how to produce this format:</p>
+<pre><code class="language-sh">&gt; 20230227
+</code></pre>
+<details>
+<summary>Answer</summary>
+<pre><code class="language-sh">date +"%Y%m%d"
+</code></pre>
+</details>
+</li>
+<li>
+<p>Now modify this output to display:</p>
+<pre><code class="language-sh">&gt; Year: 2023, Month: 02, Day: 27
+</code></pre>
+<details>
+<summary>Answer</summary>
+<pre><code class="language-sh">date +"Year: %Y, Month: %m, Day: %d"
+</code></pre>
+</details>
+</li>
+<li>
+<p>The most common formatting characters:</p>
+<ul>
+<li><code>%D</code> – Display date as mm/dd/yy</li>
+<li><code>%Y</code> – Year (e.g., 2020)</li>
+<li><code>%m</code> – Month (01-12)</li>
+<li><code>%B</code> – Long month name (e.g., November)</li>
+<li><code>%b</code> – Short month name (e.g., Nov)</li>
+<li><code>%d</code> – Day of month (e.g., 01)</li>
+<li><code>%j</code> – Day of year (001-366)</li>
+<li><code>%u</code> – Day of week (1-7)</li>
+<li><code>%A</code> – Full weekday name (e.g., Friday)</li>
+<li><code>%a</code> – Short weekday name (e.g., Fri)</li>
+<li><code>%H</code> – Hour (00-23)</li>
+<li><code>%I</code> – Hour (01-12)</li>
+<li><code>%M</code> – Minute (00-59)</li>
+<li><code>%S</code> – Second (00-60)</li>
+</ul>
+</li>
+<li>
+<p>Using the above information and what previous steps reproduce the ISO 8601 standard for datetime.</p>
+<pre><code class="language-sh">&gt; 2023-02-27T12:08:45Z
+</code></pre>
+<details>
+<summary>Answer</summary>
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ"
+</code></pre>
+<ul>
+<li><code>%Y</code> – Year (e.g., 2020)</li>
+<li><code>%m</code> – Month (01-12)</li>
+<li><code>%d</code> – Day of month (e.g., 01)</li>
+<li><code>T</code> – self delimeter</li>
+<li><code>%H</code> – Hour (00-23)</li>
+<li><code>:</code> – self delimeter</li>
+<li><code>%M</code> – Minute (00-59)</li>
+<li><code>:</code> – self delimeter</li>
+<li><code>%S</code> – Second (00-60)</li>
+<li><code>Z</code> – self delimeter</li>
+</ul>
+</details>
+</li>
+<li>
+<p>Amend the last command so that after seconds you get nano seconds.</p>
+<pre><code class="language-sh">&gt; 2023-02-27T12:14:03:281999558Z
+</code></pre>
+<details>
+<summary>Answer</summary>
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ"
+</code></pre>
+<ul>
+<li><code>%Y</code> – Year (e.g., 2020)</li>
+<li><code>%m</code> – Month (01-12)</li>
+<li><code>%d</code> – Day of month (e.g., 01)</li>
+<li><code>T</code> – self delimeter</li>
+<li><code>%H</code> – Hour (00-23)</li>
+<li><code>:</code> – self delimeter</li>
+<li><code>%M</code> – Minute (00-59)</li>
+<li><code>:</code> – self delimeter</li>
+<li><code>%S</code> – Second (00-60)</li>
+<li><code>:</code> – self delimeter</li>
+<li><code>%N</code> – nanoseconds (000000000..999999999)</li>
+<li><code>Z</code> – self delimeter</li>
+</ul>
+</details>
+</li>
+</ol>
+<hr />
+<h2 id="11-manipulating-inputs-and-outputs"><a class="header" href="#11-manipulating-inputs-and-outputs">11 Manipulating inputs and outputs</a></h2>
+<ol>
+<li>
+<p>working with the previous command lets strip out the <code>T</code>,<code>:</code>s and <code>Z</code> so that we are left with only numnbers.</p>
+</li>
+<li>
+<p>Using <code>awk</code> we can manipulate the output by piping <code>|</code> the output of <code>date</code> into awk
+- first run this command</p>
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk "{print $1}" 
+&gt; 2023-02-27T12:20:40:005619503Z   
+</code></pre>
+<ul>
+<li><code>awk</code> with the argument <code>print $1</code> will print the first argument... ie the output of <code>date</code></li>
+</ul>
+</li>
+<li>
+<p>Now lets remove the <code>T</code></p>
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F 'T' '{print $1}'
+&gt; 2023-02-27
+</code></pre>
+</li>
+<li>
+<p>What happens when you do $2 on the same command as above?</p>
+<details>
+<summary>Answer</summary>
+<pre><code class="language-sh">&gt; 12:50:48:341942600Z
+</code></pre>
+<p>This is because the input has been split and now</p>
+<ul>
+<li>$1 = 2023-02-27</li>
+<li>$2 = 12:20:40:005619503Z</li>
+</ul>
+</details>
+</li>
+<li>
+<p>Change the delimeter <code>-F 'T'</code> to <code>-F ':'</code> and repeat both steps as before:</p>
+<details>
+<summary>Answer</details>
+<pre><code class="language-sh">$  date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $1}'
+&gt;  2023-02-27T12
+</code></pre>
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $2}'
+  55
+$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $3}'
+  32
+$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $4}'
+  473072761Z
+</code></pre>
+</details>
+</li>
+<li>
+<p>You can put these together using the print {$2$3$4$}, try.
+<code>sh      date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F ':' '{print $2$3$4}'      5719707652042Z      </code></p>
+</li>
+<li>
+<p>Experiment with this and consider piping with awk to see if you can get:</p>
+<pre><code class="language-sh">20230227130026355420256
+</code></pre>
+<details>
+<summary>Answer</summary>
+<pre><code class="language-sh">$ date +"%Y-%m-%dT%H:%M:%S:%NZ" | awk -F '[-T:Z]' '{print $1$2$3$4$5$6$7$8$9}'
+20230227130026355420256
+</code></pre>
+</details></li>
+</ol>
+
+                    </main>
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Labs/Introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Bash/Bash_Scripting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Labs/Introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Bash/Bash_Scripting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>
