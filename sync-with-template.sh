@@ -78,16 +78,11 @@ git branch -D template-merge
 echo "Committing the merged changes..."
 git add "${INCLUDE_FILES[@]}"
 
-# Check if there are any changes to commit
-if git diff --cached --quiet; then
-  echo "No changes detected."
-else
-  # Grab the commit message from template Version: [0-9].[0-9].[0-9]
-  NEWVERSION=$(grep -w Version < README.md | cut -f 4 -d ' ')
+# Grab the commit message from template Version: [0-9].[0-9].[0-9]
+NEWVERSION=$(grep -w Version < README.md | cut -f 4 -d ' ')
 
-  # Message format works for upgrade and rollback
-  git commit -m "template: from Version ${OLDVERSION:-0.0.0} to ${NEWVERSION}"
-  echo "Changes committed."
-fi
+# Message format works for upgrade and rollback
+git commit -m "template: from Version ${OLDVERSION:-0.0.0} to ${NEWVERSION}"
+echo "Changes committed."
 
 echo -e "Operation complete.\n"

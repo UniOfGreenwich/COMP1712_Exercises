@@ -28,8 +28,8 @@ This template includes the following tech stack:
 - [GitHub mdbook-pagtoc](https://github.com/slowsage/mdbook-pagetoc)
   - [mdbook-pagtoc Documentation](https://jorel.dev/mdBook-pagetoc/)
 
-- [GitHub mdbook-pagtoc](https://github.com/cognitive-engineering-lab/mdbook-quiz)
-  - [mdbook-pagtoc Documentation](https://github.com/cognitive-engineering-lab/mdbook-quiz)
+- [GitHub mdbook-quiz](https://github.com/cognitive-engineering-lab/mdbook-quiz)
+  - [mdbook-quiz Documentation](https://github.com/cognitive-engineering-lab/mdbook-quiz)
 
 ## Contribution
 
