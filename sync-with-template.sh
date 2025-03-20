@@ -8,11 +8,13 @@ NEWVERSION=''
 
 # Paths
 BOOK_TOML="book.toml"
+BOOK_TOML_TMP="book.toml.tmp"
 
-# Extract the lines to preserve from book.toml
-TITLE_LINE=$(grep '^title = ' "$BOOK_TOML")
-REPO_URL_LINE=$(grep '^git-repository-url = ' "$BOOK_TOML")
-EDIT_URL_LINE=$(grep '^edit-url-template = ' "$BOOK_TOML")
+# Extract preserved values from the current book.toml
+echo "Extracting preserved values from $BOOK_TOML..."
+TITLE_VALUE=$(grep '^title = ' "$BOOK_TOML")
+REPO_URL_VALUE=$(grep '^git-repository-url = ' "$BOOK_TOML")
+EDIT_URL_VALUE=$(grep '^edit-url-template = ' "$BOOK_TOML")
 
 # setup-config.sh
 echo "Setting up the .git/config file with template repository..."
@@ -55,16 +57,17 @@ for file in "${INCLUDE_FILES[@]}"; do
   fi
 done
 
-# Restore the preserved lines in book.toml
+# Replace extracted values in the updated book.toml
 if [[ -f "$BOOK_TOML" ]]; then
-  echo "Restoring preserved lines in $BOOK_TOML..."
-  # Remove existing lines
-  sed -i '/^title = /d' "$BOOK_TOML"
-  sed -i '/^git-repository-url = /d' "$BOOK_TOML"
-  sed -i '/^edit-url-template = /d' "$BOOK_TOML"
-  
-  # Prepend the preserved values
-  echo -e "$TITLE_LINE\n$REPO_URL_LINE\n$EDIT_URL_LINE\n$(cat "$BOOK_TOML")" > "$BOOK_TOML"
+  echo "Restoring preserved values in $BOOK_TOML..."
+
+  # Use sed to find the matching keys and replace their values
+  sed -E -e "s|^title = .*|${TITLE_VALUE}|" \
+         -e "s|^git-repository-url = .*|${REPO_URL_VALUE}|" \
+         -e "s|^edit-url-template = .*|${EDIT_URL_VALUE}|" "$BOOK_TOML" > "$BOOK_TOML_TMP"
+
+  # Replace original book.toml with the modified one
+  mv "$BOOK_TOML_TMP" "$BOOK_TOML"
 fi
 
 # Clean up the temporary branch
