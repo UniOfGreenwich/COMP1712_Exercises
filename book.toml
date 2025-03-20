@@ -7,7 +7,6 @@ title = "Computer Architecture and Operating Systems"
 
 [output.html]
 mathjax-support = true
-input-404 = "404/404.md"
 git-repository-url = "https://github.com/uniofgreenwich/COMP1712_Exercises"
 edit-url-template = "https://github.com/uniofgreenwich/COMP1712_Exercises/edit/main/{path}"
 additional-css = ["./theme/pagetoc.css", "./theme/css/mdbook-admonish.css", "./theme/css/code.css","./theme/css/terminal.css","./theme/css/output.css"]
