@@ -41,6 +41,7 @@ git checkout -
 # List of files and directories to merge
 INCLUDE_FILES=(
   ".github/*"
+  ".gitignore"
   "README.md"
   "sync-with-template.sh"
   "theme/*"
